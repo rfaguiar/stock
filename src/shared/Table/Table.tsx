@@ -37,7 +37,7 @@ const Table: React.FC<TableProps> = (props) => {
                 return <tr key={i}>
                     {
                         Object.keys(row)
-                            .map(item => {
+                            .map((item, i) => {
                                 if (item !== '$original') {
                                     return <td 
                                         className={indexedHeaders[item].right ? 'right' : ''}
