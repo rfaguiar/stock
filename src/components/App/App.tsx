@@ -1,24 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import TestComponent from "../TestComponent";
+import Header from "../Header";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <TestComponent name={"Usuario"}/>
-        {/*<ClassComponent name={"Mundoooo"}/>*/}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Header title={"Stock"} />
+      App
     </div>
   );
 }
