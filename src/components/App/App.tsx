@@ -33,7 +33,14 @@ function App() {
     <div className="App">
       <Header title={"Stock"} />
       <Container>
-          <Table data={products} headers={headers}/>
+          <Table 
+              data={products} 
+              headers={headers}
+              enableActions
+              onDelete={() => console.log('del')}
+              onDetail={() => console.log('det')}
+              onEdit={() => console.log('ed')}
+          />
           <ProductForm 
               form={updatingProduct}
               onSubmit={handleProductSubmit}
