@@ -14,7 +14,7 @@ const Form: React.FC<FormProps> = props => {
     
     return <form className={"AppForm"} onSubmit={preventSubmit}>
         {
-            props.title && <div>
+            props.title && <div className={'Title'}>
                 { props.title }
             </div>
         }
