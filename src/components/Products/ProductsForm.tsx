@@ -5,7 +5,7 @@ import Button from "../../shared/Button";
 import {Product} from "../../shared/Table/Table.mockdata";
 
 declare interface InitialFormState {
-    id?: number
+    _id?: string
     name: string
     price: string
     stock: string
@@ -25,7 +25,7 @@ declare interface ProductFormProps {
 
 const ProductForm: React.FC<ProductFormProps> = (props) => {
     const initialFormState: InitialFormState = props.form ? {
-       id: props.form.id,
+       _id: String(props.form._id),
        name: props.form.name,
        price: String(props.form.price),
        stock: String(props.form.stock) 
@@ -47,7 +47,7 @@ const ProductForm: React.FC<ProductFormProps> = (props) => {
     }
     const updateProduct = (product: InitialFormState) => {
         const productDto = {
-            id: Number(product.id),
+            _id: String(product._id),
             name: String(product.name),
             price: parseFloat(product.price),
             stock: Number(product.stock)
@@ -63,7 +63,7 @@ const ProductForm: React.FC<ProductFormProps> = (props) => {
         props.onSubmit && props.onSubmit(productDto)
     }
     const handleFormSubmit =() => {
-        form.id ? updateProduct(form) : createProduct(form)
+        form._id ? updateProduct(form) : createProduct(form)
         setForm(initialFormState)
     }
     
@@ -98,7 +98,7 @@ const ProductForm: React.FC<ProductFormProps> = (props) => {
         />
         <Button>
             {
-                form.id ? 'Update' : 'Submit'
+                form._id ? 'Update' : 'Submit'
             }
         </Button>
     </Form>

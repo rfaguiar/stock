@@ -10,9 +10,9 @@ import {getAllProducts} from "../../services/Products.service";
 
 const headers: TableHeader[] = [
     { key: 'id', value: '#' },
-    {key: 'name', value: 'Product'},
-    {key: 'price', value: 'Price'},
-    {key: 'stock', value: 'Available Stock', right: true}
+    { key: 'name', value: 'Product' },
+    { key: 'price', value: 'Price' },
+    { key: 'stock', value: 'Available Stock', right: true }
 ]
 
 function App() {
@@ -29,13 +29,13 @@ function App() {
         setProducts([
             ...products,
             {
-                id: products.length + 1,
+                _id: String(products.length + 1),
                 ...product
             }
         ])
     }
     const handleProductUpdate = (newProduct: Product) => {
-        setProducts(products.map(product => product.id === newProduct.id ? newProduct : product))
+        setProducts(products.map(product => product._id === newProduct._id ? newProduct : product))
         setUpdatingProduct(undefined)
     }    
     const handleProductEdit = (product: Product) => {
@@ -49,8 +49,8 @@ function App() {
             'info'
         )
     }
-    const deleteProduct = (id: number) => {
-        setProducts(products.filter(product => product.id !== id))
+    const deleteProduct = (id: string) => {
+        setProducts(products.filter(product => product._id !== id))
     }
     const handleProductDelete = (product: Product) => {
         Swal.fire({
@@ -63,7 +63,7 @@ function App() {
             confirmButtonText: `Yes, delete ${product.name}!`
         }).then(result => {
             if (result.value) {
-                deleteProduct(product.id)
+                deleteProduct(product._id)
                 Swal.fire('Deleted!', 'Your product has been deleted', 'success')
             }
         })
