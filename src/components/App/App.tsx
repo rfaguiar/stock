@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import HomeView from "../views/HomeView";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import NotFoundView from "../views/NotFoundView";
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
             <BrowserRouter>
                 <Switch>
                     <Route path={"/"} exact component={HomeView} />
+                    <Route component={NotFoundView} />
                 </Switch>
             </BrowserRouter>
                 
