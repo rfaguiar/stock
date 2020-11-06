@@ -5,7 +5,7 @@ import {deleteSingleProduct, updateSingleProduct} from "../../services/Products.
 import ProductForm, {ProductCreator} from "./ProductsForm";
 import Swal from "sweetalert2";
 import {connect, useDispatch} from "react-redux";
-import {insertNewProduct} from "../../redux/Products/Product.actions";
+import {getProducts, insertNewProduct} from "../../redux/Products/Product.actions";
 
 const headers: TableHeader[] = [
     { key: 'id', value: '#' },
@@ -23,11 +23,10 @@ const ProductsCRUD: React.FC<ProductsCRUDProps> = (props) => {
     //const [products, setProducts] = useState<Product[]>([])
     const [updatingProduct, setUpdatingProduct] = useState<Product | undefined>(undefined)
     useEffect(() => {
-        fetchData().then()
+        fetchData()
     }, [])
-    async function fetchData() {
-        // const _products = await getAllProducts()
-        // setProducts(_products)
+    function fetchData() {
+        dispatch(getProducts())
     }
     const handleProductSubmit = async (product: ProductCreator) => {
         try {
