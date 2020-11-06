@@ -1,4 +1,4 @@
-import {createStore, combineReducers, compose, applyMiddleware} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import Products from './Products/Products.redux';
 import thunk, {ThunkAction} from "redux-thunk";
 
@@ -21,7 +21,7 @@ export interface Action<T = any> {
 }
 
 export type RootState = ReturnType<typeof reducers>
-
 export type Thunk<T = any > = ThunkAction<void, RootState, unknown, Action<T>>
+export type ThunkDispatch = (thunk: Thunk) => Promise<Thunk>
 
 export default store
