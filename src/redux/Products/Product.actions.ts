@@ -1,8 +1,9 @@
-import {Action} from "./Products.redux";
+import {Action, Thunk} from "../index";
 import {ProductCreator} from "../../components/Products/ProductsForm";
 import {getAllProducts} from "../../services/Products.service";
+import {Product} from "../../shared/Table/Table.mockdata";
 
-export const getProducts = () => async (dispatch: any) => {
+export const getProducts = ():Thunk<Product[]> => async (dispatch) => {
     const payload = await getAllProducts();
     dispatch({
         type: 'FETCH_PRODUCTS',
