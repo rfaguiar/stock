@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import ProfileCard, {User} from "../Authentication/ProfileCard";
 import Header from "../Header";
 import Container from "../../shared/Container";
+import withPermission from "../../utils/hoc/withPermission";
+import {RootState} from "../../redux";
 
 declare interface ProfileViewProps {
     user: User
@@ -23,11 +25,13 @@ const ProfileView: React.FC<ProfileViewProps> = (props) => {
     </>
 }
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state: RootState) => ({
     user: {
-        name: "Roger",
-        email: "roger@stock.com"
+        name: state.authentication.profile?.user,
+        email: state.authentication.profile?.email
     }
 })
 
-export default connect(mapStateToProps)(ProfileView)
+export default connect(mapStateToProps)(
+    withPermission(['admin', 'customer'], '/')(ProfileView)
+)
