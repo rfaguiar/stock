@@ -1,19 +1,31 @@
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import Products from './Products/Products.redux';
 import thunk, {ThunkAction} from "redux-thunk";
+import {persistReducer, persistStore} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import Authentication from './Authentication/Authentication.reducer';
 
 const reducers = combineReducers({
-    products: Products
+    products: Products,
+    authentication: Authentication
 })
 
+const persistedReducer = persistReducer({
+    key: 'stock',
+    storage,
+    blacklist: ['products']
+}, reducers)
+
 const store = createStore(
-    reducers,
+    persistedReducer,
     compose(
         applyMiddleware(thunk),
         //@ts-ignore
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 )
+
+const persistor = persistStore(store)
 
 export interface Action<T = any> {
     type: string
@@ -24,4 +36,4 @@ export type RootState = ReturnType<typeof reducers>
 export type Thunk<T = any > = ThunkAction<void, RootState, unknown, Action<T>>
 export type ThunkDispatch = (thunk: Thunk) => Promise<Thunk>
 
-export default store
+export {store, persistor}

@@ -1,7 +1,7 @@
-import Products, {Product} from "../../shared/Table/Table.mockdata";
+import {Product} from "../../shared/Table/Table.mockdata";
 import {Action} from "../index";
 
-export default function productsRedux(state= Products, action: Action): Product[] {
+export default function productsRedux(state: Product[] = [], action: Action): Product[] {
     switch (action.type) {
         case 'FETCH_PRODUCTS':
             return [...action.payload]
