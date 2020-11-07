@@ -2,7 +2,7 @@ import axios from "axios";
 import {store} from "../redux";
 
 const http = axios.create({
-    baseURL: 'http://localhost:3024/'
+    baseURL: 'https://rfaguiar-api-stock.herokuapp.com'
 });
 
 http.interceptors.request.use(config => {
