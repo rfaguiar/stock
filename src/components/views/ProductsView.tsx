@@ -3,7 +3,7 @@ import Header from "../Header";
 import Container from "../../shared/Container";
 import ProductsCRUD from "../Products/ProductsCRUD";
 
-const HomeView = () => {
+const ProductsView = () => {
     return <>
         <Header title={"Stock"} />
         <Container>
@@ -12,4 +12,4 @@ const HomeView = () => {
     </>
 }
 
-export default HomeView
+export default ProductsView
