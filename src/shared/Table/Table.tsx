@@ -2,7 +2,9 @@ import React from "react";
 import "./Table.scss";
 import organizeData from "../../utils/organizeDataForTable";
 import Button from "../Button";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
+import {parse} from "query-string";
+import paginate from "../../utils/paginate";
 
 export declare interface TableHeader {
     key: string
@@ -17,11 +19,16 @@ declare interface TableProps {
     onDelete?: (item: any) => void
     onDetail?: (item: any) => void
     onEdit?: (item: any) => void
+    itemsPerPage?: number
 }
 
 const Table: React.FC<TableProps> = (props) => {
+    const location = useLocation()
     const [organizedData, indexedHeaders] = organizeData(props.data, props.headers)
-    const page = 2
+    const itemsPerPage = props.itemsPerPage || 5
+    const page = parseInt(parse(location.search).page as string) || 1
+    const paginated = paginate(organizedData, itemsPerPage, page)
+    const totalPages = Math.ceil(organizedData.length / itemsPerPage)
     return <>
         <table className={"AppTable"}>
             <thead>
@@ -43,7 +50,7 @@ const Table: React.FC<TableProps> = (props) => {
         </thead>
             <tbody>
             {
-                organizedData.map((row, i) => {
+                paginated.map((row, i) => {
                     return <tr key={i}>
                         {
                             Object.keys(row)
@@ -88,10 +95,11 @@ const Table: React.FC<TableProps> = (props) => {
         </table>
         <div className={"Table__pagination"}>
         {
-            Array(10)
+            Array(totalPages)
                 .fill('')
                 .map((_,i) => {
-                    return <NavLink activeClassName={"selected"} 
+                    return <NavLink key={i}
+                                    activeClassName={"selected"} 
                                     to={`/products?page=${i + 1}`}
                                     isActive={() => page === i + 1}>
                         { i + 1 }
