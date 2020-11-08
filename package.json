@@ -25,8 +25,9 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": " react-scripts start",
     "build": "react-scripts build",
+    "build-docker": "REACT_APP_API_BASE_URL=/api && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
